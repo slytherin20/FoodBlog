@@ -1,0 +1,16 @@
+
+  <nav class="white">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo white black-text">FoodAllDay</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down black">
+        <li><a href="/">Home</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="/{{user.username}}">{{user.username|title}}</a></li>
+          <li><a href="/logout">Logout</a></li>
+        {% else %}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Signup</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,47 @@
+{% if comments.count == 1 %}
+  <h2>{{ comments.count }} comment</h2>
+{% else %}
+  <h2>{{ comments.count }} comments</h2>
+{% endif %}
+
+
+    <div class="col-md-8 card mb-4  mt-3 " style="margin:auto;">
+        <div class="card-body" style="padding: 10px;font-size: 20px;">
+        	{% for comment in comments %}
+          	<p style="font-weight:bold">
+            	{{ comment.name }}
+          	</p>
+              <p style="font-style:italic;font-weight:normal;font-size:10px;">
+                  {{ comment.created_on }}
+              </p>
+             <p>
+            {{ comment.text | linebreaks }}
+             </p>
+            <br>
+          {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div class="col-md-8 card mb-4  mt-3 " style = "margin:auto; padding-left: 10px;">
+      <div class="card-body">
+        {% if newcomment %}
+        	<script type="text/javascript">M.toast({html: "Your comment is under moderation.", classes: 'black rounded', displayLength:2000});</script>
+            {% endif %}
+        <h3>Leave a comment</h3>
+        <div class="container">
+		      <form method = "POST">
+			       {%  csrf_token %}
+			       {{form.as_p}}
+			       <br>
+			       <button class="btn" type="submit" style="background-color:black;color:white;margin-bottom: 10px;" name ="action" value = "comment-section">Submit</button>
+          </form>
+			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  p{
+    margin:0;
+  }
+</style>

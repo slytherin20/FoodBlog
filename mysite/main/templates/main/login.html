@@ -1,0 +1,13 @@
+{% extends "main/format.html" %}
+
+{%  block content %}
+<div class="container">
+<form method = "POST">
+	{%  csrf_token %}
+	{{form.as_p}}
+	<br>
+	<button class="btn" type="submit" style="background-color:black;color:white">Login</button>
+<p>If you don't have an account,sign up <a href="/register">here</a>.</p>
+</form>
+</div>
+{% endblock %}

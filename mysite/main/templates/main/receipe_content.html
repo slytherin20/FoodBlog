@@ -1,0 +1,62 @@
+{%  extends "main/format.html" %}
+{% block content %}
+<div class="card" >
+  <form method = "POST">
+    {% csrf_token %}
+      {% if bookmark %}
+        <button id ="inp" type = "submit" name = "action" value = "1" ><i class="medium material-icons"  id = "icon" onclick = "change()">check_circle</i></button>
+     
+      {% else %}
+        <button id ="inp" type = "submit" name = "action" value = "0"><i class="medium material-icons"  id = "icon" onclick = "change()">bookmark</i></button>
+      {% endif %}
+
+   </form>
+        <div class="image">
+          <img src="{{content.image.url}}" class="img-responsive">
+          <span class="card-title"><p style="color:black">{{content.title}}</p></span>
+        </div>
+        <div class="content">
+          <p>{{content.text}}</p>
+        </div>
+  </div>
+  {% include "main/comments.html" %}
+  <style>
+  	.card{
+  		width: 800px;
+      padding:15px;
+  	}
+  	.card .image img{
+  		width:600px;
+  		margin: 100px;
+      height:500px;
+  	}
+    #inp{
+        border:0;
+        background: transparent;
+    }
+
+  </style>
+  <script>
+    function change(){
+      var x = document.getElementById("icon").innerText
+      if(x == 'bookmark'){
+        {% if user.is_authenticated %}
+          document.getElementById("icon").innerText = 'check_circle';
+          document.getElementById("inp").value='1';
+          M.toast({html: "Bookmarked", classes: 'black rounded', displayLength:2000});
+
+        {% else%}
+
+            M.toast({html: "Login required.", classes: 'red rounded', displayLength:2000}); 
+        {% endif %}
+        
+      }
+      else{
+         document.getElementById("icon").innerText = 'bookmark';
+         document.getElementById("inp").value='0';
+         M.toast({html: "Bookmark removed", classes: 'black rounded', displayLength:2000});
+      }
+    }
+  </script>
+  
+{% endblock %}

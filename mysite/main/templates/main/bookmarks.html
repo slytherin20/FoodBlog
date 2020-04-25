@@ -1,0 +1,38 @@
+{% extends "main/format.html" %}
+
+{% block content %}
+<h3>Bookmarked receipes</h3>
+<ul class="collection">
+	{% for bookmark in bookmarks %}
+    <li class="collection-item avatar">
+      <img src="{{bookmark.receipe.image.url}}" alt="" class="circle">
+      <span class="title">{{bookmark.receipe.title}}</span>
+      <p>{{bookmark.receipe.category_title}}
+      </p>
+      <form method="POST">
+      	{% csrf_token %}
+      <button type ="submit" class="secondary-content" name ="favourite" onclick="change()" value = "{{bookmark.receipe.title}}"><i class="material-icons">check_circle</i></button>
+      </form>
+    </li>
+    {% endfor %}
+</ul>   
+
+
+<style>
+	.collection .colletion-item .avatar{
+		height:150px;
+		width:50%;
+	}
+	.secondary-content{
+		border:0;
+		background: transparent;
+		color: black;
+		cursor:auto;
+	}
+</style>
+<script>
+	function change(){
+		M.toast({html: "Receipe removed", classes: 'black rounded', displayLength:10000});
+	}
+</script>
+{% endblock %}
