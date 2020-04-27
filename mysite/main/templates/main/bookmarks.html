@@ -4,6 +4,7 @@
 <h3>Bookmarked receipes</h3>
 <ul class="collection">
 	{% for bookmark in bookmarks %}
+	<a href = "/categories/{{bookmark.receipe.receipe_slug}}" style ="color:black;">
     <li class="collection-item avatar">
       <img src="{{bookmark.receipe.image.url}}" alt="" class="circle">
       <span class="title">{{bookmark.receipe.title}}</span>
@@ -14,6 +15,7 @@
       <button type ="submit" class="secondary-content" name ="favourite" onclick="change()" value = "{{bookmark.receipe.title}}"><i class="material-icons">check_circle</i></button>
       </form>
     </li>
+	</a>
     {% endfor %}
 </ul>   
 
